@@ -1,1 +1,6 @@
 # This file will contain any requirements for the production version of the program.
+
+# 3.9 is latest "stable" version of Python
+python ~= 3.9.6
+
+# we need a certain TUI lib, chosen later
