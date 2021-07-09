@@ -45,11 +45,14 @@ jobs:
           ${{ hashFiles('./Pipfile', './Pipfile.lock') }}"
 
       # Uncomment the step that matches your setup.
-
       # Default Env setup
       - name: Run hooks through our requirement file
         run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade setuptools
+          pip install wheel
           pip install -r dev-requirements.txt
+          pip install .
           pre-commit run --all-files
         env:
           # Force pre-commit to do a system install.
