@@ -4,12 +4,16 @@
 
 ## Installing
 
-###Python version
-The project is developed for Python 3.9
+### Python version
+The project was developed for Python 3.9 - we recommend you use this version to ensure compatibility.
+
+### Setup Instructions
 
 TODO
 
 ## Installing for Development
+
+We recommend using Python 3.9.6 for development, since it is the latest stable version.
 
 After cloning the repo, `cd` into the project directory and follow these steps:
 
