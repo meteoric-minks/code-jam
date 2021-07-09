@@ -2,10 +2,6 @@
 # Don't forget to pin your dependencies!
 # This list will have to be migrated if you wish to use another dependency manager.
 
-# Interpreter itself
-# 3.9 is latest "stable" version of Python
-python ~= 3.9.0
-
 # Base tools
 flake8~=3.7
 isort~=5.9
