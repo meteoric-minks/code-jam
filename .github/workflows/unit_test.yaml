@@ -1,16 +1,16 @@
-# GitHub Action Workflow enforcing our code style.
+# GitHub Action Workflow automatically running unit tests
 
-name: Lint, Build & Deploy
+name: Unit Testing
 
 # Trigger the workflow on both push (to the main repository)
 # and pull requests (against the main repository, but from any repo).
 on: [push, pull_request]
 # Brand new concurrency setting! This ensures that not more than one run can be triggered for the same commit.
 # It is useful for pull requests coming from the main repository since both triggers will match.
-concurrency: lint-${{ github.sha }}
+concurrency: utest-${{ github.sha }}
 
 jobs:
-  lint:
+  utest:
     runs-on: ubuntu-latest
 
     env:
@@ -44,30 +44,15 @@ jobs:
           ${{ steps.python.outputs.python-version }}-\
           ${{ hashFiles('./Pipfile', './Pipfile.lock') }}"
 
-      # Uncomment the step that matches your setup.
-      # Default Env setup
+      # Default Env setup, installation of
       - name: Run hooks through our requirement file
         run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade setuptools
+          pip install wheel
           pip install -r dev-requirements.txt
-          pre-commit run --all-files
-        env:
-          # Force pre-commit to do a system install.
-          PIP_USER: 0
-
-        # Pipenv setup
-        # - name: Run hooks through our Pipenv environment.
-        #  run: |
-        #    pipenv install --system --dev
-        #    pipenv run python -m pre-commit run --all-files
-        #  env:
-        #    # Force pre-commit to do a system install.
-        #    PIP_USER: 0
-
-        # Poetry setup
-        # - name: Run hooks through our Poetry environment.
-        #  run: |
-        #    poetry install
-        #    poetry run python -m pre-commit run --all-files
-        #  env:
-        #    # Force pre-commit to do a system install.
-        #    PIP_USER: 0
+      - name: Install the package
+        run: |
+          pip install .
+      - name: Run pytest on it
+        run: python -m pytest
