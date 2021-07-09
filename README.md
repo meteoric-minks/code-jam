@@ -4,6 +4,9 @@
 
 ## Installing
 
+###Python version
+The project is developed for Python 3.9
+
 TODO
 
 ## Installing for Development
