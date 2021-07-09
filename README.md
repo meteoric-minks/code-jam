@@ -1,3 +1,5 @@
+[Meteoric Minks Banner](https://raw.githubusercontent.com/meteoric-minks/code-jam/main/src/banner.png)
+
 # Setup
 
 ## Installing
