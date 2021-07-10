@@ -11,7 +11,7 @@ concurrency: lint-${{ github.sha }}
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     env:
       # Set an environment variable to select pip's cache directory for us to actually cache between runs.

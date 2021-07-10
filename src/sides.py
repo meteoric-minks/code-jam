@@ -1,7 +1,8 @@
 from vector import vector
 
+
 class side:
-    """side objects to make up the geometry of the world"""
+    """Side objects to make up the geometry of the world"""
 
     def __init__(self, cornerA, cornerB):
         self.cornerA = cornerA
@@ -9,7 +10,7 @@ class side:
         self.extremesCalc()
 
     def extremesCalc(self):
-        """gets the min and max point of the side"""
+        """Gets the min and max point of the side"""
         self.mins = vector(min(self.cornerA.x, self.cornerB.x), min(self.cornerA.y, self.cornerB.y))
         self.maxs = vector(max(self.cornerA.x, self.cornerB.x), max(self.cornerA.y, self.cornerB.y))
 
