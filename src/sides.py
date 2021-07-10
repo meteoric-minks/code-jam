@@ -19,6 +19,3 @@ class side:
         self.cornerA += translationVector
         self.cornerB += translationVector
         self.extremesCalc()
-
-
-print("aaa")
