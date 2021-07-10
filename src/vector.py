@@ -5,7 +5,7 @@ class vector:
         self.x = x
         self.y = y
 
-    def __add__(self, other) -> None:
+    def __add__(self, other):  # noqa: ANN001
         self.x += other.x
         self.y += other.y
 
