@@ -6,8 +6,7 @@ class vector:
         self.y = y
 
     def __add__(self, other):
-        self.x += other.x
-        self.y += other.y
+        return vector(self.x + other.x, self.y + other.y)
 
     def size(self):
         """Calculates the hypotemuse of a vector"""
