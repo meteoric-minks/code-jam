@@ -4,7 +4,7 @@ from vector import vector, vectorBearing, vectorDistance
 class wall:
     """Side objects to make up the geometry of the world"""
 
-    def __init__(self, cornerA: vector(), cornerB: vector(), color=(0, 0, 0), texture=' ') -> None:
+    def __init__(self, cornerA: vector(), cornerB: vector(), color=(0, 0, 0), texture=' ') -> None:  # noqa: ANN001
         self.cornerA = cornerA
         self.cornerB = cornerB
         self.color = color
