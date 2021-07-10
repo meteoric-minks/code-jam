@@ -18,7 +18,7 @@ class bar:
 #    def __init__(self):
 #        self.walls = []
 #
-#    def render(self, playerLocation: vector(), playerRotation: float, fov: int, resolution: list) -> None:
+#    def render(self, playerLocation: vector, playerRotation: float, fov: int, resolution: list) -> None:
 #        """Renders the scene in the terminal"""
 #        frame = [bar() for i in range(resolution[0])]
 #        for eachWall in self.walls:

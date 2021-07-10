@@ -4,7 +4,7 @@ from vector import vector, vectorBearing, vectorDistance
 class wall:
     """Side objects to make up the geometry of the world"""
 
-    def __init__(self, cornerA: vector(), cornerB: vector(), color=(0, 0, 0), texture=' ') -> None:  # noqa: ANN001
+    def __init__(self, cornerA: vector, cornerB: vector, color=(0, 0, 0), texture=' ') -> None:  # noqa: ANN001
         self.cornerA = cornerA
         self.cornerB = cornerB
         self.color = color
@@ -16,13 +16,13 @@ class wall:
         self.mins = vector(min(self.cornerA.x, self.cornerB.x), min(self.cornerA.y, self.cornerB.y))
         self.maxs = vector(max(self.cornerA.x, self.cornerB.x), max(self.cornerA.y, self.cornerB.y))
 
-    def move(self, translationVector: vector()) -> None:
+    def move(self, translationVector: vector -> None:
         """Translates a wall along a given vector"""
         self.cornerA += translationVector
         self.cornerB += translationVector
         self.extremesCalc()
 
-    def getScreenLocation(self, cameraLocation: vector(), cameraRotation: float, fov: int) -> list:
+    def getScreenLocation(self, cameraLocation: vector, cameraRotation: float, fov: int) -> list:
         """Returns the location on screen and the distance to the corners of the wall"""
         output = [[0, 0], [0, 0]]
         cornerA = self.cornerA

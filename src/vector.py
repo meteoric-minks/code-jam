@@ -31,13 +31,13 @@ class vector:
         self = newVector
 
 
-def vectorDistance(vectorA: vector(), vectorB: vector()) -> float:
+def vectorDistance(vectorA: vector, vectorB: vector) -> float:
     """Calculates the distance between two vectors"""
     finalVector = vector(abs(vectorA.x - vectorB.x), abs(vectorA.y - vectorB.y))
     return finalVector.size()
 
 
-def vectorBearing(vectorA: vector(), vectorB: vector()) -> float:
+def vectorBearing(vectorA: vector, vectorB: vector) -> float:
     """Calculates the bearing of vectorB from vectorA"""
     newVector = vectorB-vectorA
     return atan(newVector.x / newVector.y)
