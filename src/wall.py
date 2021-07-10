@@ -1,7 +1,7 @@
 from vector import vector, vectorBearing, vectorDistance
 
 
-class side:
+class wall:
     """Side objects to make up the geometry of the world"""
 
     def __init__(self, cornerA: vector(), cornerB: vector()) -> None:
@@ -10,18 +10,18 @@ class side:
         self.extremesCalc()
 
     def extremesCalc(self) -> None:
-        """Gets the min and max point of the side"""
+        """Gets the min and max point of the wall"""
         self.mins = vector(min(self.cornerA.x, self.cornerB.x), min(self.cornerA.y, self.cornerB.y))
         self.maxs = vector(max(self.cornerA.x, self.cornerB.x), max(self.cornerA.y, self.cornerB.y))
 
     def move(self, translationVector: vector()) -> None:
-        """Translates a side along a given vector"""
+        """Translates a wall along a given vector"""
         self.cornerA += translationVector
         self.cornerB += translationVector
         self.extremesCalc()
 
     def getScreenLocation(self, cameraLocation: vector(), cameraRotation: float, fov: int) -> list:
-        """Returns the location on screen and the distance to the corners of the side"""
+        """Returns the location on screen and the distance to the corners of the wall"""
         output = [[0, 0], [0, 0]]
         cornerA = self.cornerA
         cornerB = self.cornerB
