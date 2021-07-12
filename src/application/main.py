@@ -1,37 +1,26 @@
-import time
+import functools
 
-from application.menu import MainMenu
 from blessed import Terminal
 
+from application.menu import Button, Menu, MessageBox, TextUI
 
-def main() -> str:
-    """This is a start of application's structure"""
+
+def show_menu() -> None:
+    """Shows a menu with start and end buttons. Start button shows a message box"""
     term = Terminal()
-    # to avoid "never used" from flake
-    print(term)
-    return "Hello World!"
+    tui = TextUI(term)
 
+    messagebox = MessageBox(tui, title="Start", message="Press esc to exit")
+    # makes a window-changing callback
+    show_messagebox = functools.partial(setattr, tui, 'window', messagebox)
 
-def show_menu():
-    term = Terminal()
-    menu = MainMenu(term)
-    with term.fullscreen(), term.hidden_cursor():
-        menu.show()
-        with term.cbreak():
-            while True:
-                pressed = term.inkey().code
-                if pressed in (term.KEY_Q, term.KEY_ESCAPE):
-                    break
-                if pressed in (term.KEY_UP,):
-                    menu.selection_up()
-                    menu.show()
-                if pressed in (term.KEY_DOWN,):
-                    menu.selection_down()
-                    menu.show()
-                if pressed in (term.KEY_ENTER, term.KEY_SPACE):
-                    menu.selected.action()
-                    time.sleep(1)
-                    break
+    start_button = Button(tui, title="Start", action=show_messagebox)
+    exit_button = Button(tui, title="Exit", action=tui.exit)
+    buttons = [start_button, exit_button]
+
+    main_menu = Menu(tui, title="Main Menu", width=50, buttons=buttons)
+    tui.window = main_menu
+    tui.run()
 
 
 if __name__ == '__main__':
