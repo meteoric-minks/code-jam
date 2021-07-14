@@ -12,8 +12,8 @@ class Room:
                  c: LineChar = Light,  # Which drawing chars to use
                  ):
 
-        self.coord = (x, y)
-        self.size = (width, height)
+        self.x, self.y = x, y
+        self.width, self.height = width, height
 
         self.char = c
 
