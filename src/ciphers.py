@@ -21,11 +21,26 @@ def caesar(plainText: str, key: int) -> str:
 
 def pairSwapper(plainText: str) -> str:
     """Swaps adjacent characters in pairs. Eg: \"PYTHON\" > \"YPHTNO\""""
-    #  This was stolen from a previous project of mine, so sorry if it's hard to read
+    plainText = list(plainText.lower())
+    symbols = []
+
+    # removing symbols and storing their location
+    for index in range(len(plainText)):
+        if not(plainText[index] in ascii_lowercase):
+            symbols.append([index, plainText[index]])
+            plainText[index] = "@"  # maintains string length so subsequent loops aren't messed up
+
+    plainText = [char for char in plainText if char != "@"]  # removing the "@"s
+
     for index in range(1, len(plainText), 2):  # Goes through every pair of characters
         # Assigns both simultaneously as both read from eachother
         plainText[index - 1], plainText[index] = plainText[index], plainText[index - 1]
-    return plainText
+
+    # Adding symbols back to final string
+    for element in symbols:
+        plainText.insert(element[0], element[1])
+
+    return "".join(plainText)
 
 
 def randomSwapper(plainText: str, seed: int) -> str:
@@ -39,3 +54,5 @@ def randomSwapper(plainText: str, seed: int) -> str:
     for char in plainText:
         cipherText += cipher[char]
     return cipherText
+
+print(pairSwapper("Hi Bro!P")) #Expected output = "iH rBP!o"
