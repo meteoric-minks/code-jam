@@ -1,1 +1,2 @@
 # This file will contain any requirements for the production version of the program.
+blessed>=1.18.1
