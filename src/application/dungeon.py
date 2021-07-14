@@ -1,4 +1,4 @@
-from ascii_box import Light, LineChar
+from .ascii_box import Light, LineChar
 
 
 class Room:
