@@ -1,5 +1,5 @@
 from string import ascii_lowercase
-
+import random
 
 def shift(character: str, shift: int) -> str:
     """Shifts a single character along the alphabet"""
@@ -24,3 +24,15 @@ def pairSwapper(plainText: str) -> str:
         # Assigns both simultaneously as both read from eachother
         plainText[index - 1], plainText[index] = plainText[index], plainText[index - 1]
     return plainText
+
+
+def randomSwapper(plainText: str, seed: int) -> str:
+    """Encodes a string using a randomly generated substitution cipher (the same seed will use the same cipher)"""
+    random.seed(seed)  # makes randomization always the same for a specific seed
+    shuffledAlphabet = random.shuffle(ascii_lowercase)
+    # Dictionary for encoding the string, eg. {"a": "u", "b": "e" ...}
+    cipher = {letter: randLetter for letter, randLetter in zip(ascii_lowercase, shuffledAlphabet)}
+    cipherText = ""
+    for char in plainText:
+        cipherText += cipher[char]
+    return cipherText
