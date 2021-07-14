@@ -15,3 +15,10 @@ def caesar(plainText: str, key: int) -> str:
     for char in plainText:
         cipherText += shift(char, key)
     return cipherText
+
+
+def pairSwapper(plainText: str) -> str:
+    """Swaps adjacent characters in pairs. Eg: \"PYTHON\" > \"YPHTNO\""""
+    for index in range(1, len(plainText), 2):
+        plainText[index - 1], plainText[index] = plainText[index], plainText[index - 1]
+    return plainText
