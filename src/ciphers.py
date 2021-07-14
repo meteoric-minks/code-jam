@@ -19,6 +19,8 @@ def caesar(plainText: str, key: int) -> str:
 
 def pairSwapper(plainText: str) -> str:
     """Swaps adjacent characters in pairs. Eg: \"PYTHON\" > \"YPHTNO\""""
-    for index in range(1, len(plainText), 2):
+    #  This was stolen from a previous project of mine, so sorry if it's hard to read
+    for index in range(1, len(plainText), 2):  # Goes through every pair of characters
+        # Assigns both simultaneously as both read from eachother
         plainText[index - 1], plainText[index] = plainText[index], plainText[index - 1]
     return plainText
