@@ -4,7 +4,8 @@ from string import ascii_lowercase
 
 def shift(character: str, shift: int) -> str:
     """Shifts a single character along the alphabet"""
-    character.lower()
+    if character == " ":
+        return character
     location = ascii_lowercase.index(character)
     character = ascii_lowercase[(location + shift) % 26]
     return character
@@ -13,7 +14,7 @@ def shift(character: str, shift: int) -> str:
 def caesar(plainText: str, key: int) -> str:
     """Performs the caesar chipher on a string given a key"""
     cipherText = ""
-    for char in plainText:
+    for char in plainText.lower():
         cipherText += shift(char, key)
     return cipherText
 
