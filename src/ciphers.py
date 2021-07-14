@@ -1,5 +1,6 @@
-from string import ascii_lowercase
 import random
+from string import ascii_lowercase
+
 
 def shift(character: str, shift: int) -> str:
     """Shifts a single character along the alphabet"""
@@ -31,6 +32,7 @@ def randomSwapper(plainText: str, seed: int) -> str:
     random.seed(seed)  # makes randomization always the same for a specific seed
     shuffledAlphabet = random.shuffle(ascii_lowercase)
     # Dictionary for encoding the string, eg. {"a": "u", "b": "e" ...}
+    # zip() is used to combine two iterables into one
     cipher = {letter: randLetter for letter, randLetter in zip(ascii_lowercase, shuffledAlphabet)}
     cipherText = ""
     for char in plainText:
