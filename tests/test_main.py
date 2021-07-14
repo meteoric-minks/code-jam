@@ -1,5 +1,6 @@
 from blessed import Terminal
 
+from application.dungeon import Dungeon, Room
 from application.menu import Button, Menu, TextUI
 
 
@@ -49,3 +50,16 @@ def test_button_switch_up() -> None:
     assert menu.selected is buttons[1]
     menu.selection_up()
     assert menu.selected is buttons[0]
+
+
+def test_dungeon_add_room() -> None:
+    """Checks that dungeons store their rooms correctly"""
+    room1 = Room(0, 0)
+    room2 = Room(10, 6)
+    dungeon = Dungeon()
+
+    dungeon.add_room(room1)
+    dungeon.add_room(room2)
+
+    assert dungeon.rooms[0] is room1
+    assert dungeon.rooms[1] is room2
