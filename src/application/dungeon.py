@@ -28,6 +28,8 @@ class Room:
         """Will return a rendered box of the room and should include anything within the room.
 
         Returns a list of one-line strings.
+        Returning a list will make it much easier to add spaces on the left so it can be rendered in the correct
+        place on the screen.
         """
         pass
 
