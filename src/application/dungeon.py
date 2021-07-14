@@ -21,8 +21,24 @@ class Room:
         """Calculate if the room intersects some box.
 
         Will be used to check if the room should be rendered at a given time.
+
+        x0,y0 will represent the top left, x1,y1 represents the bottom right.
+        Note: this is inclusive, i.e. if the rectantangles only touch it is still counted as intersecting.
         """
-        pass
+        if (
+            (x0 > (self.x + self.width))  # Box is to the right of room
+            or (self.x > x1)  # Room is to the right of box
+        ):
+            return False
+
+        elif (
+            (y0 > (self.y + self.height))  # Box is below room
+            or (self.y > y1)  # Room is below box
+        ):
+            return False
+
+        else:  # If none of these conditions are true, they must overlap
+            return True
 
     def render(self) -> list[str]:
         """Will return a rendered box of the room and should include anything within the room.
