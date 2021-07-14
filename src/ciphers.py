@@ -1,32 +1,42 @@
 import random
-from string import ascii_lowercase
+from string import ascii_lowercase, ascii_uppercase
+
+LOWER_ALPHA = ascii_lowercase
+UPPER_ALPHA = ascii_uppercase
+FULL_ALPHA = LOWER_ALPHA + UPPER_ALPHA
+ALPHA_DIGITS = FULL_ALPHA + "0123456789"
 
 
 def shift(character: str, shift: int) -> str:
     """Shifts a single character along the alphabet"""
-    if character == " ":
+    if character in LOWER_ALPHA:
+        temp_alpha = LOWER_ALPHA
+    elif character in UPPER_ALPHA:
+        temp_alpha = UPPER_ALPHA
+    else:
         return character
-    location = ascii_lowercase.index(character)
-    character = ascii_lowercase[(location + shift) % 26]
+
+    location = temp_alpha.index(character)
+    character = temp_alpha[(location + shift) % 26]
     return character
 
 
 def caesar(plainText: str, key: int) -> str:
     """Performs the caesar chipher on a string given a key"""
     cipherText = ""
-    for char in plainText.lower():
+    for char in plainText:
         cipherText += shift(char, key)
     return cipherText
 
 
 def pairSwapper(plainText: str) -> str:
     """Swaps adjacent characters in pairs. Eg: \"PYTHON\" > \"YPHTNO\""""
-    plainText = list(plainText.lower())
+    plainText = list(plainText)
     symbols = []
 
     # removing symbols and storing their location
     for index in range(len(plainText)):
-        if not(plainText[index] in ascii_lowercase):
+        if not(plainText[index] in ALPHA_DIGITS):
             symbols.append([index, plainText[index]])
             plainText[index] = "@"  # maintains string length so subsequent loops aren't messed up
 
@@ -43,16 +53,21 @@ def pairSwapper(plainText: str) -> str:
     return "".join(plainText)
 
 
-def randomSwapper(plainText: str, seed: int) -> str:
+def randomSubstitute(plainText: str, seed: int) -> str:
     """Encodes a string using a randomly generated substitution cipher (the same seed will use the same cipher)"""
+    lowerShuffle = list(LOWER_ALPHA)
+    upperShuffle = list(UPPER_ALPHA)
     random.seed(seed)  # makes randomization always the same for a specific seed
-    shuffledAlphabet = random.shuffle(ascii_lowercase)
+    random.shuffle(lowerShuffle)
+    random.seed(seed)
+    random.shuffle(upperShuffle)
     # Dictionary for encoding the string, eg. {"a": "u", "b": "e" ...}
     # zip() is used to combine two iterables into one
-    cipher = {letter: randLetter for letter, randLetter in zip(ascii_lowercase, shuffledAlphabet)}
+    cipher = {letter: randLetter for letter, randLetter in zip(FULL_ALPHA, lowerShuffle + upperShuffle)}
     cipherText = ""
     for char in plainText:
-        cipherText += cipher[char]
+        if char in list(FULL_ALPHA):
+            cipherText += cipher[char]
+        else:
+            cipherText += char
     return cipherText
-
-print(pairSwapper("Hi Bro!P")) #Expected output = "iH rBP!o"
