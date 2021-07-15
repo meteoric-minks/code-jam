@@ -58,10 +58,9 @@ def random_substitution(plain_text: str, seed: int) -> str:
     """Encodes a string using a substitution cipher generated from the seed"""
     lower_shuffle = list(LOWER_ALPHA)
     upper_shuffle = list(UPPER_ALPHA)
-    random.seed(seed)  # makes randomization always the same for a specific seed
-    random.shuffle(lower_shuffle)
-    random.seed(seed)
-    random.shuffle(upper_shuffle)
+    # makes randomization always the same for a specific seed
+    random.Random(seed).shuffle(lower_shuffle)
+    random.Random(seed).shuffle(upper_shuffle)
     # Dictionary for encoding the string, eg. {"a": "u", "b": "e" ...}
     # zip() is used to combine two iterables into one
     cipher = {letter: randLetter for letter, randLetter in zip(FULL_ALPHA, lower_shuffle + upper_shuffle)}
