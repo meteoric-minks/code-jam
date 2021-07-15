@@ -7,6 +7,10 @@ FULL_ALPHA = LOWER_ALPHA + UPPER_ALPHA
 ALPHA_DIGITS = FULL_ALPHA + "0123456789"
 
 
+# TODO:
+# -reverse cipher
+# rotation? cipher (hello >> ohell)
+
 def shift(character: str, shift: int) -> str:
     """Shifts a single character along the alphabet"""
     # Checking if character is lowercase, uppercase or not a letter
