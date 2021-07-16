@@ -47,7 +47,30 @@ class Room:
         Returning a list will make it much easier to add spaces on the left so it can be rendered in the correct
         place on the screen.
         """
-        pass
+        # Start with a blank 2D list
+        # Lists are much easier to work with since individual items can be set, unlike strings
+        image = [[" " for x in range(self.width)] for y in range(self.height)]
+
+        # Top and bottom row
+        image[0][0] = self.char.DownRight.value
+        image[0][-1] = self.char.DownLeft.value
+
+        image[-1][0] = self.char.UpRight.value
+        image[-1][-1] = self.char.UpLeft.value
+
+        for n in range(1, self.width - 1):
+            image[0][n] = self.char.Horizontal.value
+            image[-1][n] = self.char.Horizontal.value
+
+        # Sides
+        for n in range(1, self.height - 1):
+            image[n][0] = self.char.Vertical.value
+            image[n][-1] = self.char.Vertical.value
+
+        # Join rows
+        image = list(map(lambda x: "".join(x), image))
+
+        return image
 
 
 class Dungeon:
