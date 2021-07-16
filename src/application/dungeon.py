@@ -1,4 +1,21 @@
-from .ascii_box import Light, LineChar
+from .ascii_box import DrawingChar, Light, LineChar
+
+
+class Item:
+    """Represents an item within a Room."""
+
+    def __init__(self, x: int, y: int, c: DrawingChar, interact: bool = False):
+        self.x, self.y = x, y  # Coords relative to room
+        self.char = c
+
+        self.interact = False
+
+    def __repr__(self):
+        return "<Item '{}' at {}, {}>".format(self.char, self.x, self.y)
+
+    def command(self) -> None:
+        """Command to run when interacted with"""
+        pass
 
 
 class Room:
