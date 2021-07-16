@@ -1,5 +1,6 @@
 from blessed import Terminal
 
+from application.ascii_box import Heavy
 from application.dungeon import Dungeon, Room
 from application.menu import Button, Menu, TextUI
 
@@ -76,3 +77,18 @@ def test_room_intersection() -> None:
     assert room.intersects(2, 4, 20, 20) is True  # Room is fully enclosed
     assert room.intersects(6, 6, 12, 8) is True  # Box is fully enclosed
     assert room.intersects(15, 6, 20, 8) is True  # Only touches
+
+
+def test_room_render() -> None:
+    """Test room.render"""
+    room = Room(5, 3, 12, 4, c=Heavy)
+
+    render = room.render()
+    render = "\n".join(render)
+
+    target_render = """┏━━━━━━━━━━┓
+┃          ┃
+┃          ┃
+┗━━━━━━━━━━┛"""
+
+    assert render == target_render
