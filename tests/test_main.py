@@ -1,7 +1,8 @@
+import pytest
 from blessed import Terminal
 
-from application.ascii_box import Heavy
-from application.dungeon import Dungeon, Room
+from application.ascii_box import DrawingChar, Heavy
+from application.dungeon import Dungeon, Item, Room
 from application.menu import Button, Menu, TextUI
 
 
@@ -92,3 +93,53 @@ def test_room_render() -> None:
 ┗━━━━━━━━━━┛"""
 
     assert render == target_render
+
+
+def test_room_render_with_item() -> None:
+    """Test room.render when the room contains items"""
+    room = Room(3, 6)
+
+    item1 = Item(4, 3, DrawingChar.Box)
+    item2 = Item(1, 1, DrawingChar.Vase)
+
+    room.add_item(item1)
+    room.add_item(item2)
+
+    render = room.render()
+    render = "\n".join(render)
+
+    target_render = """┌────────┐
+│⚱       │
+│        │
+│   ▣    │
+│        │
+└────────┘"""
+
+    print(render)
+    print(target_render)
+
+    assert render == target_render
+
+
+def test_item_adding() -> None:
+    """Test Room.add_item()"""
+    room = Room(3, 6)
+
+    item1 = Item(4, 3, DrawingChar.Box)
+    item2 = Item(1, 1, DrawingChar.Vase)
+
+    room.add_item(item1)
+    room.add_item(item2)
+
+    assert room.items[0] is item1
+    assert room.items[1] is item2
+
+
+def test_item_adding_out_of_room() -> None:
+    """Check that room.add_item throws an exception when the item is not in the room"""
+    room = Room(3, 6)
+
+    item1 = Item(10, 3, DrawingChar.Box)
+
+    with pytest.raises(ValueError):
+        room.add_item(item1)
