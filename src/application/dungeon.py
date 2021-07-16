@@ -34,6 +34,9 @@ class Room:
 
         self.char = c
 
+    def __repr__(self):
+        return "<Room of size {}x{} at {}, {}>".format(self.width, self.height, self.x, self.y)
+
     def intersects(self, x0: int, y0: int, x1: int, y1: int) -> bool:
         """Calculate if the room intersects some box.
 
