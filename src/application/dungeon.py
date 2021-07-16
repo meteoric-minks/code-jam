@@ -119,3 +119,12 @@ class Dungeon:
     def add_room(self, room: Room) -> None:
         """Adds a room to the dungeon."""
         self.rooms.append(room)
+
+    def render(self,
+               x0: int,  # Coord, in the dungeon, of the top left of the screen
+               y0: int,
+               x1: int,  # Coord, in the dungeon, of the bottom right of the screen
+               y1: int,
+               ) -> str:
+        """Renders the entire dungeon."""
+        pass
