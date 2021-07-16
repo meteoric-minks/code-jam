@@ -1,7 +1,8 @@
 import pytest
 from blessed import Terminal
 
-from application.ascii_box import DrawingChar, Heavy
+from application.ascii_box import Heavy
+from application.ascii_drawing import DrawingChar
 from application.dungeon import Dungeon, Item, Room
 from application.menu import Button, Menu, TextUI
 

@@ -1,4 +1,5 @@
-from .ascii_box import DrawingChar, Light, LineChar
+from .ascii_box import Light, LineChar
+from .ascii_drawing import DrawingChar
 
 
 class Item:
