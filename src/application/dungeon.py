@@ -34,8 +34,17 @@ class Room:
 
         self.char = c
 
+        self.items = []
+
     def __repr__(self):
         return "<Room of size {}x{} at {}, {}>".format(self.width, self.height, self.x, self.y)
+
+    def add_item(self, item: Item) -> None:
+        """Add an item to the room"""
+        if 0 < item.x < self.width - 1 and 0 < item.y < self.height - 1:  # Ensure item is within room
+            self.items.append(item)
+        else:
+            raise ValueError("Item {} is not within Room {}".format(item, self))
 
     def intersects(self, x0: int, y0: int, x1: int, y1: int) -> bool:
         """Calculate if the room intersects some box.
@@ -86,6 +95,10 @@ class Room:
         for n in range(1, self.height - 1):
             image[n][0] = self.char.Vertical.value
             image[n][-1] = self.char.Vertical.value
+
+        # Add items
+        for item in self.items:
+            image[item.y][item.x] = item.char.value
 
         # Join rows
         image = list(map(lambda x: "".join(x), image))
