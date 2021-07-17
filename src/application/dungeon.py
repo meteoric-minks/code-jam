@@ -127,4 +127,31 @@ class Dungeon:
                y1: int,
                ) -> str:
         """Renders the entire dungeon."""
-        pass
+        result = [[" " for x in range(x1 - x0 + 1)] for y in range(y1 - y0 + 1)]  # Use a list of lists for now
+        # This makes it much easier to set specific locations in the output
+
+        for r in self.rooms:
+            if r.intersects(x0, y0, x1, y1):
+                r_rend = r.render()
+
+                x_offset = r.x - x0
+                y_offset = r.y - y0
+
+                if y_offset >= 0:
+                    ys = y_offset  # Y Pos to start Drawing
+                else:
+                    r_rend = r_rend[-y_offset:]
+                    ys = 0
+
+                if x_offset >= 0:
+                    xs = x_offset  # X Pos to start drawing
+                else:
+                    r_rend = list(map(lambda x: x[-x_offset:],
+                                      r_rend))
+                    xs = 0
+
+                for y in [y for y in range(len(r_rend)) if y + ys <= y1]:
+                    for x in [x for x in range(len(r_rend[0])) if x + xs <= x1]:
+                        result[y + ys][x + xs] = r_rend[y][x]
+
+        return result
