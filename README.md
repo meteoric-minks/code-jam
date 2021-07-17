@@ -9,7 +9,40 @@ The project was developed for Python 3.9 - we recommend you use this version to 
 
 ### Setup Instructions
 
-TODO
+Create a Venv:
+```shell
+python -m venv .venv
+```
+
+Enter the environment:
+This will differ based on your OS/Shell
+```shell
+# Linux, Bash
+$ source .venv/bin/activate
+# Linux, Fish
+$ source .venv/bin/activate.fish
+# Linux, Csh
+$ source .venv/bin/activate.csh
+# Linux, PowerShell Core
+$ .venv/bin/Activate.ps1
+# Windows, cmd.exe
+> .venv\Scripts\activate.bat
+# Windows, PowerShell
+> .venv\Scripts\Activate.ps1
+```
+
+Install dependencies and application:
+```
+pip install -r requirements.txt
+pip install -c .
+```
+
+To run, use:
+```shell
+python -m application.main
+```
+
+Use Arrow keys to move and enter to interact with objects.
 
 ## Installing for Development
 
