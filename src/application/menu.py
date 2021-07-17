@@ -192,6 +192,7 @@ class DungeonEngine(UIElement):
             self.term.KEY_RIGHT: self.move_right,
             self.term.KEY_DOWN: self.move_down,
             self.term.KEY_LEFT: self.move_left,
+            self.term.KEY_ENTER: self.interact,
         }
 
     def move_up(self) -> None:
@@ -212,6 +213,11 @@ class DungeonEngine(UIElement):
     def move_left(self) -> None:
         """Move character left"""
         self.dungeon.character.move(3)
+        self.tui.redraw()
+
+    def interact(self) -> None:
+        """Character interact with object"""
+        self.dungeon.character.interact()
         self.tui.redraw()
 
     def show(self) -> list[str]:

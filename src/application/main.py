@@ -5,7 +5,7 @@ from blessed import Terminal
 from application.ascii_box import Double, Heavy
 from application.ascii_drawing import DrawingChar
 from application.dungeon import Character, Dungeon, Item, Room
-from application.menu import Button, DungeonEngine, Menu, TextUI
+from application.menu import Button, DungeonEngine, Menu, MessageBox, TextUI
 
 
 def setup_dungeon() -> Dungeon:
@@ -49,11 +49,16 @@ def show_menu() -> None:
 
     dung_wrapper = DungeonEngine(tui, dung)
 
-    # messagebox = MessageBox(tui, title="Start", message="Press esc to exit")
+    messagebox = MessageBox(tui, title="Start", message="Press esc to exit")
     # makes a window-changing callback
-    show_messagebox = functools.partial(setattr, tui, 'window', dung_wrapper)
+    show_messagebox = functools.partial(setattr, tui, 'window', messagebox)
 
-    start_button = Button(tui, title="Start", action=show_messagebox)
+    show_dung = functools.partial(setattr, tui, 'window', dung_wrapper)
+
+    dung.rooms[0].items[1].interact = True
+    dung.rooms[0].items[1].command = show_messagebox
+
+    start_button = Button(tui, title="Start", action=show_dung)
     exit_button = Button(tui, title="Exit", action=tui.exit)
     buttons = [start_button, exit_button]
 

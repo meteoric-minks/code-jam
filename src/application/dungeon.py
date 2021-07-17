@@ -200,3 +200,10 @@ class Character:
 
         if self.dungeon.in_room(newx, newy):
             self.x, self.y = newx, newy
+
+    def interact(self) -> None:
+        """Interact with anything the player is on"""
+        for r in self.dungeon.rooms:
+            for i in r.items:
+                if i.interact and i.x - 1 <= self.x <= i.x + 1 and i.x - 1 <= self.x <= i.x + 1:
+                    i.command()
