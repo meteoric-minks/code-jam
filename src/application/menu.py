@@ -9,6 +9,8 @@ from typing import Callable, Optional
 from blessed import Terminal
 from blessed.keyboard import Keystroke
 
+from application.dungeon import Dungeon
+
 echo = functools.partial(print, sep='', flush=True)
 
 KeyCode = int
@@ -175,6 +177,51 @@ class MessageBox(UIElement):
         message = self.message.center(self.width - 2)
         boxed = self.make_box([title, message])
         return boxed
+
+
+class DungeonEngine(UIElement):
+    """UIElement wrapper for the dungeon module"""
+
+    def __init__(self, tui: TextUI, dungeon: Dungeon):
+        super().__init__(tui, title="Dungeon", width=tui.term.width)
+
+        self.dungeon = dungeon
+
+        self.key_actions = {
+            self.term.KEY_UP: self.move_up,
+            self.term.KEY_RIGHT: self.move_right,
+            self.term.KEY_DOWN: self.move_down,
+            self.term.KEY_LEFT: self.move_left,
+        }
+
+    def move_up(self) -> None:
+        """Move character up"""
+        self.dungeon.character.move(0)
+        self.tui.redraw()
+
+    def move_right(self) -> None:
+        """Move character right"""
+        self.dungeon.character.move(1)
+        self.tui.redraw()
+
+    def move_down(self) -> None:
+        """Move character down"""
+        self.dungeon.character.move(2)
+        self.tui.redraw()
+
+    def move_left(self) -> None:
+        """Move character left"""
+        self.dungeon.character.move(3)
+        self.tui.redraw()
+
+    def show(self) -> list[str]:
+        """Returns the rendered dungeon"""
+        tl_x = self.dungeon.character.x - (self.tui.term.width // 2)
+        tl_y = self.dungeon.character.y - (self.tui.term.height // 2)
+        br_x = self.dungeon.character.x + (self.tui.term.width // 2) - 1
+        br_y = self.dungeon.character.y + (self.tui.term.height // 2)
+
+        return self.dungeon.render(tl_x, tl_y, br_x, br_y)
 
 
 class TextUI:
