@@ -1,2 +1,4 @@
 # This file will contain any requirements for the production version of the program.
-blessed>=1.18.1
+
+# TUI framework
+blessed ~= 1.8

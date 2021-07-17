@@ -2,10 +2,14 @@
 # Don't forget to pin your dependencies!
 # This list will have to be migrated if you wish to use another dependency manager.
 
+# Copies prod requirements
+-r requirements.txt
+
 # Base tools
 flake8~=3.7
 isort~=5.9
 pre-commit~=2.13.0
+pytest~=6.2
 
 # Flake8 plugins, see https://github.com/python-discord/code-jam-template/tree/main#plugin-list
 flake8-annotations~=2.0
