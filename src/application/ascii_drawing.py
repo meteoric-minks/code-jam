@@ -10,3 +10,4 @@ class DrawingChar(Enum):
 
     Box = '▣'
     Vase = '⚱'
+    Character = '•'
