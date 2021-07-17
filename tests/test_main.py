@@ -74,11 +74,13 @@ def test_room_intersection() -> None:
 
     assert room.intersects(0, 0, 3, 10) is False  # Box is left of Room
     assert room.intersects(3, 2, 8, 4) is False  # Box is above of Room
+    assert room.intersects(3, 8, 3, 8) is False  # Check it works on single points
 
     assert room.intersects(1, 0, 8, 6) is True
     assert room.intersects(2, 4, 20, 20) is True  # Room is fully enclosed
     assert room.intersects(6, 6, 12, 8) is True  # Box is fully enclosed
     assert room.intersects(15, 6, 20, 8) is True  # Only touches
+    assert room.intersects(6, 6, 6, 6) is True  # Check it works on single points
 
 
 def test_room_render() -> None:
