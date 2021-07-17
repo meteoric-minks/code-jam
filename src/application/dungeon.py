@@ -150,8 +150,8 @@ class Dungeon:
                                       r_rend))
                     xs = 0
 
-                for y in [y for y in range(len(r_rend)) if y + ys <= y1]:
-                    for x in [x for x in range(len(r_rend[0])) if x + xs <= x1]:
+                for y in [y for y in range(len(r_rend)) if y + ys <= y1 - y0]:
+                    for x in [x for x in range(len(r_rend[0])) if x + xs <= x1 - x0]:
                         result[y + ys][x + xs] = r_rend[y][x]
 
         result = list(map(lambda x: "".join(x), result))
