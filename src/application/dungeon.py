@@ -125,7 +125,7 @@ class Dungeon:
                y0: int,
                x1: int,  # Coord, in the dungeon, of the bottom right of the screen
                y1: int,
-               ) -> str:
+               ) -> list[str]:
         """Renders the entire dungeon."""
         result = [[" " for x in range(x1 - x0 + 1)] for y in range(y1 - y0 + 1)]  # Use a list of lists for now
         # This makes it much easier to set specific locations in the output
@@ -153,5 +153,7 @@ class Dungeon:
                 for y in [y for y in range(len(r_rend)) if y + ys <= y1]:
                     for x in [x for x in range(len(r_rend[0])) if x + xs <= x1]:
                         result[y + ys][x + xs] = r_rend[y][x]
+
+        result = list(map(lambda x: "".join(x), result))
 
         return result
