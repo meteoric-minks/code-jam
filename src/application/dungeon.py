@@ -1,3 +1,5 @@
+from __future__ import annotations  # Fixes an issue with some annotations
+
 from .ascii_box import Light, LineChar
 from .ascii_drawing import DrawingChar
 
@@ -120,6 +122,10 @@ class Dungeon:
         """Adds a room to the dungeon."""
         self.rooms.append(room)
 
+    def set_character(self, char: Character) -> None:
+        """Sets the dungeon's character."""
+        self.character = char
+
     def render(self,
                x0: int,  # Coord, in the dungeon, of the top left of the screen
                y0: int,
@@ -154,6 +160,43 @@ class Dungeon:
                     for x in [x for x in range(len(r_rend[0])) if x + xs <= x1 - x0]:
                         result[y + ys][x + xs] = r_rend[y][x]
 
+        result[self.character.y - y0][self.character.x - x0] = self.character.char.value
+
         result = list(map(lambda x: "".join(x), result))
 
         return result
+
+    def in_room(self, x: int, y: int) -> bool:
+        """Will be used to check if the character is able to move to a given coordinate."""
+        results = []
+
+        for r in self.rooms:
+            results.append(r.intersects(x, y, x, y))
+
+        return any(results)
+
+
+class Character:
+    """Represents a movable character onscreen."""
+
+    directions = [
+        [0, -1],
+        [1, 0],
+        [0, 1],
+        [-1, 0],
+    ]
+
+    def __init__(self, dungeon: Dungeon, x: int = 0, y: int = 0, c: DrawingChar = DrawingChar.Character):
+        self.dungeon = dungeon
+        self.x, self.y = x, y
+        self.char = c
+
+    def move(self, dir: int) -> None:
+        """Move the character.
+
+        Direction: 0=N, 1=E, 2=S, 3=W
+        """
+        newx, newy = self.x + self.directions[dir][0], self.y + self.directions[dir][1]
+
+        if self.dungeon.in_room(newx, newy):
+            self.x, self.y = newx, newy
